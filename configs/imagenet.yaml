@@ -1,0 +1,39 @@
+
+
+dataset:
+  name: ImageNet
+  path: '~/Data/'
+  image_size: 224
+
+# $HOME/Data/ImageNet
+
+
+
+model:
+  name: MAE
+  mask:
+    ratio: 0.75
+
+  encoder:
+    name: ViT-H # vit huge
+
+  decoder:
+
+  objective:
+    normalize_patch: True
+
+optimizer:
+  name: AdamW
+  # lr: 0.1
+  # weight_decay: 0.00001
+  # warmup_epochs: 5
+
+
+
+
+
+
+
+
+
+
