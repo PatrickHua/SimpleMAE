@@ -1,17 +1,28 @@
 
+image_size: 224
+patch_size: 16
 
 dataset:
-  name: ImageNet
-  path: '~/Data/'
-  image_size: 224
+  name: imagenet # name of the dataset, same with data folder name. $HOME/Data/ImageNet
+  root: '~/Data/'
+  folder_name: 'ImageNet' # name of your imagenet dataset. such as 'ILSVRC2012', 'ImageNet', 'imagenet' etc.
+  download: False
 
-# $HOME/Data/ImageNet
+train_loader:
+  batch_size: 128
+  shuffle: True
+  pin_memory: True
+  drop_last: True
 
-
+test_loader:
+  batch_size: 256
+  shuffle: False
+  pin_memory: True
 
 model:
   name: MAE
   mask:
+    random: uniform # uniform, gaussian etc. 
     ratio: 0.75
 
   encoder:

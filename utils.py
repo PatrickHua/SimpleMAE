@@ -21,7 +21,8 @@ def set_debug(args, *datasets):
         # train_set = use_subset(train_set, args.train_loader['batch_size'])
         # test_set = use_subset(test_set, args.test_loader['batch_size'])
         for i, dataset in enumerate(datasets):
-            datasets[i] = use_subset(dataset, args.debug_size)
+            datasets[i] = use_subset(dataset, args.subset_size)
         args.epochs = 1
         args.eval_epochs = 1
+        args.num_workers = 0
     return args, *datasets
