@@ -39,7 +39,7 @@ def get_dataset(name, root, split, image_size, download=False, folder_name=None)
     elif name == 'imagenet': 
         dataset = torchvision.datasets.ImageNet(
             os.path.join(root, 'ImageNet' if not folder_name else folder_name), 
-            split=split if split=='train' else 'val', transform=None, download=download)
+            split=split if split=='train' else 'val', transform=transform, download=download)
 
     else:
         raise NotImplementedError

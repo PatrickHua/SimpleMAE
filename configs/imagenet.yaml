@@ -1,6 +1,6 @@
 
-image_size: 224
-patch_size: 16
+image_size: 224 # both the dataset and model will depend on this param
+# patch_size: 16
 
 dataset:
   name: imagenet # name of the dataset, same with data folder name. $HOME/Data/ImageNet
@@ -21,25 +21,39 @@ test_loader:
 
 model:
   name: MAE
-  mask:
-    random: uniform # uniform, gaussian etc. 
-    ratio: 0.75
-
+  image_channel: 3
+  # image_size: 224
+  patch_size: 16
+  enc_dim: 512
   encoder:
-    name: ViT-H # vit huge
+    num_layers: 12
+    norm: null
+    # layer_kwargs:
+    nhead: 8
+    dim_feedforward: 2048
+    dropout: 0
+    activation: relu
 
+  dec_dim: 512
   decoder:
+    num_layers: 12
+    norm: null
+    # layer_kwargs:
+    nhead: 8
+    dim_feedforward: 2048
+    dropout: 0
+    activation: relu
+  mask_ratio: 0.75
+# image_channel, image_size, patch_size, enc_dim, dec_dim, encoder, decoder, mask_ratio=0.75
 
-  objective:
-    normalize_patch: True
 
 optimizer:
   name: AdamW
-  # lr: 0.1
-  # weight_decay: 0.00001
-  # warmup_epochs: 5
 
-
+scheduler:
+  name: cosine
+  lr: 0.001
+  warmup_epochs: 5
 
 
 
