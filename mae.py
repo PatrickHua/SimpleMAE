@@ -16,7 +16,7 @@ class MAE(nn.Module):
         self.token_num = (image_size//patch_size)**2
         # Note that the input to the torch.nn.Transformer have the batch dimension in the middle: [T(token), B(batch), D(feature)]
         
-        self.shuffler = CardShuffler(mask_ratio, self.token_num)
+        self.shuffler = PatchShuffler(mask_ratio, self.token_num)
         
         self.register_buffer('enc_pos', positional_encoding(enc_dim, max_len=self.token_num))
         self.register_buffer('dec_pos', positional_encoding(dec_dim, max_len=self.token_num))
@@ -66,7 +66,7 @@ class MAE(nn.Module):
         
         return {'loss':loss}
         
-class CardShuffler(nn.Module):
+class PatchShuffler(nn.Module):
     def __init__(self, ratio=0.75, token_num=196):
         super().__init__()
         self.mask_n = int(ratio*token_num)
